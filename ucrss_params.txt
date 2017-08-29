@@ -1,0 +1,5 @@
+pick_otus:similarity	0.97
+pick_otus:enable_rev_strand_match	True
+assign_taxonomy:assignment_method	rdp
+parallel_assign_taxonomy_rdp:rdp_max_memory	4000
+make_emperor:ignore_missing_samples True

@@ -1,0 +1,7 @@
+pick_otus:similarity	0.97
+pick_otus:enable_rev_strand_match	True
+assign_taxonomy:assignment_method	rdp
+parallel_assign_taxonomy_rdp:rdp_max_memory	4000
+parallel_assign_taxonomy_rdp:assign_taxonomy_reference_seqs_fp	/share/nas1/liuw/database/its/97_otus.fasta
+parallel_assign_taxonomy_rdp:assign_taxonomy_id_to_taxonomy_fp	/share/nas1/liuw/database/its/97_otu_taxonomy.txt
+make_emperor:ignore_missing_samples True

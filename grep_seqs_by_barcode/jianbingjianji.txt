@@ -1,0 +1,11 @@
+R----A/G
+Y----C/T
+M----A/C
+K----G/T
+S----G/C
+W----A/T
+H----A/T/C
+B----G/T/C
+V----G/A/C
+D----G/A/T
+N----A/G/C/T
