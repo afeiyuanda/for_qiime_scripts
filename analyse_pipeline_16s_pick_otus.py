@@ -15,6 +15,8 @@ Usage:	python """+sys.argv[0]+ """
 -outdir /path/to/outdir
 		"""
 reference_seqs = '/share/nas2/genome/biosoft/QIIME/gg_otus-13_8-release/rep_set/97_otus.fasta'
+qiime_install_dir = '/share/nas2/genome/biosoft/QIIME/qiime-1.8.0-release/bin/'
+python_path = '/share/nas2/genome/biosoft/Python/2.7.8/bin/python'
 	
 def __main__():
 
@@ -43,7 +45,7 @@ def __main__():
 	biom = outdir+'/picked_otus_uclust/otu_table_mc2_w_tax_no_pynast_failures.biom'
 	
 	os.system('rm -rf '+outdir+'/picked_otus_uclust')
-	os.system('pick_open_reference_otus.py -i '+seq+' -r /share/nas2/genome/biosoft/QIIME/gg_otus-13_8-release/rep_set/97_otus.fasta  -o '+outdir+'/picked_otus_uclust -p '+sys.path[0]+'/ucrss_params.txt -m uclust -aO '+str(cpu))
+	os.system(python_path+' '+qiime_install_dir+'/pick_open_reference_otus.py -i '+seq+' -r /share/nas2/genome/biosoft/QIIME/gg_otus-13_8-release/rep_set/97_otus.fasta  -o '+outdir+'/picked_otus_uclust -p '+sys.path[0]+'/ucrss_params.txt -m uclust -aO '+str(cpu))
 	os.system('biom summarize-table -i '+biom+' -o '+outdir+'/seqs_per_sample.txt')
 	os.system('biom summarize-table -i '+biom+' --qualitative -o '+outdir+'/otus_per_sample.txt')
 	os.system('mv '+outdir+'/picked_otus_uclust/otu_table_mc2_w_tax_no_pynast_failures.biom '+outdir)
@@ -54,7 +56,7 @@ def __main__():
 	
 	pick_otu_handle = open(pick_otu_sh, 'w')
 	cmd_list = []
-	cmd_list.append('pick_open_reference_otus.py -i '+seq+' -r /share/nas2/genome/biosoft/QIIME/gg_otus-13_8-release/rep_set/97_otus.fasta  -o '+outdir+'/picked_otus_uclust -p '+sys.path[0]+'/ucrss_params.txt -m uclust -aO '+str(cpu))
+	cmd_list.append(python_path+' '+qiime_install_dir+'/pick_open_reference_otus.py -i '+seq+' -r /share/nas2/genome/biosoft/QIIME/gg_otus-13_8-release/rep_set/97_otus.fasta  -o '+outdir+'/picked_otus_uclust -p '+sys.path[0]+'/ucrss_params.txt -m uclust -aO '+str(cpu))
 	cmd_list.append('biom summarize-table -i '+biom+' -o '+outdir+'/seqs_per_sample.txt')
 	cmd_list.append('biom summarize-table -i '+biom+' --qualitative -o '+outdir+'/otus_per_sample.txt')
 	cmd_list.append('mv '+outdir+'/picked_otus_uclust/otu_table_mc2_w_tax_no_pynast_failures.biom '+outdir)

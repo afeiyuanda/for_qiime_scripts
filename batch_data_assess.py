@@ -42,7 +42,8 @@ def generate_data_assess_cfg1(rawdata_dir, mapping_file_url):
 	f = open(cfg, 'w')
 	for sample in sorted(data_dic.keys()):
 		seqs = data_dic[sample]
-		fq1 = re.split(',|，',data_dic[sample])[0].split('.gz')[0]
+		fq1 = re.split(',|，',data_dic[sample])[0].split('.fastq')[0]+'.fastq'
+		#fq1 = re.split(',|，',data_dic[sample])[0].split('.gz')[0]
 		f.write('Sample\t' + sample + '\n')
 		f.write('fq1\t' + rawdata_dir + '/' +fq1+'\n')
 		f.write('raw_fq1\t' + rawdata_dir + '/' + fq1 + '\n')

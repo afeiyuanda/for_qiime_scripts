@@ -74,7 +74,7 @@ def __main__():
 		fq1 = re.split(',|，', sample_lib_list[1])[0]
 		fq2 = re.split(',|，', sample_lib_list[1])[1]
 		groups = sample_lib_list[2:]
-		fq1_outdir = outdir+'/'+fq1
+		fq1_outdir = outdir+'/'+fq1+'.dir'
 		os.system('mkdir '+fq1_outdir)
 		os.system('ln -sf '+indir+'/'+fq1+' '+fq1_outdir)
 		os.system('ln -sf '+indir+'/'+fq2+' '+fq1_outdir)
@@ -95,7 +95,7 @@ def __main__():
 		
 		print '      --------------Run split_libraries_fastq.py --------------' 
 		#split_libraries_fastq.py -i MIX1.extendedFrags.fastq -m mapping1.txt --sample_ids D1.C1 --barcode_type 'not-barcoded' -o split_library_output -q 30  -p 0.80
-		cmd = 'split_libraries_fastq.py -i '+ fq1_outdir+'/'+fq1+'.extendedFrags.fastq --barcode_type not-barcoded -q 30  -p 0.80 --store_demultiplexed_fastq -m ' + fq1_outdir+'/mapping.txt -o ' + fq1_outdir+'/split_library_output --sample_ids ' + sample_id
+		cmd = 'split_libraries_fastq.py -i '+ fq1_outdir+'/'+fq1+'.extendedFrags.fastq --barcode_type not-barcoded -q 20  -p 0.80 --store_demultiplexed_fastq -m ' + fq1_outdir+'/mapping.txt -o ' + fq1_outdir+'/split_library_output --sample_ids ' + sample_id
 		print '[[split_libraries_fastq CMD]]:%s' % cmd
 		subprocess.call( cmd, stdout=subprocess.PIPE, shell=True )
 		subprocess.call( 'tail -5 ' + fq1_outdir+'/split_library_output/split_library_log.txt | head -1 >> '+outdir+'/split_seqs_log.txt', stdout=subprocess.PIPE, shell=True )
