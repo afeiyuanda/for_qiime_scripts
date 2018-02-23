@@ -8,7 +8,7 @@ Data:	2014.11.19, 2014.12.04,
 Usage:	python barplot_average_taxo_abundance.py mapping_file  original_taxo_file  output_prefix
 '''
 
-import sys,copy,subprocess,glob
+import sys,copy,subprocess,glob,os
 
 def usage():
     print """
@@ -134,8 +134,9 @@ oldmar <- par()$mar
 par(xpd=T,mar=c(6,3,0,0), oma=c(1,1,0,0))
 #par(xpd=T,mar=c(6,6,0,0), oma=c(5,5,3,3))
 #par(xpd=T)
-d <- read.table("taxo.txt",header=T, sep='\\t')
+d <- read.table('"""+ os.getcwd()+"""/taxo.txt',header=T, sep='\\t')
 d$taxo <- as.factor(d$taxo)
+d$mygroups <- as.factor(d$mygroups)
 newtest <- melt(d)
 two_col <- c("#E41A1C", "#377EB8")
 mp <- bargraph.CI(taxo, value, group = mygroups,err.width=if(length(levels(newtest$taxo))>10) 0.02 else .05, data = newtest, col=two_col, err.col = "black", ci.fun = function(x) c(mean(x)-sd(x), mean(x)+sd(x)), ylim = c(0, max( newtest$value )+0.1),lwd = 1, names.arg=NULL,axisnames=FALSE,lc=F)
@@ -164,8 +165,9 @@ png(file = '"""+ barplot_img +"""',width=1000, height=1000,res=150)
 par(xpd=T,mar=c(6,3,0,0), oma=c(1,1,0,0))
 #par(xpd=T,mar=c(6,6,0,0), oma=c(5,5,3,3))
 #par(xpd=T)
-d <- read.table("taxo.txt",header=T, sep='\\t')
+d <- read.table('"""+ os.getcwd()+"""/taxo.txt',header=T, sep='\\t')
 d$taxo <- as.factor(d$taxo)
+d$mygroups <- as.factor(d$mygroups)
 newtest <- melt(d)
 mp <- bargraph.CI(taxo, value, group = mygroups,err.width=if(length(levels(newtest$taxo))>10) 0.02 else .05, data = newtest, col=brewer.pal(""" + str(groups_no) + ""","Set1"), err.col = "black", ci.fun = function(x) c(mean(x)-sd(x), mean(x)+sd(x)), ylim = c(0, max( newtest$value )+0.1),lwd = 1, names.arg=NULL,axisnames=FALSE,lc=F)
 x <- apply(mp$xvals,2,max)
