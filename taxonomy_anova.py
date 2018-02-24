@@ -124,7 +124,7 @@ def __main__():
 	Rcmd.writelines(
 	"""
 mydata <- read.table('temp_taxo.txt',check.names=FALSE,header=T,row.names=1,sep='\t')
-aov_test <- aov(mydata[,1]~mydata[,2])
+aov_test <- aov(mydata[,1]~as.factor(mydata[,2]))
 sink("anova_test_output.txt")
 TukeyHSD(aov_test)
 sink()

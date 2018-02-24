@@ -97,10 +97,11 @@ pch_list <- rep( new_pch,5 )
 
 d <- read.table('"""+ output_name +"""',header=T,sep='\\t')
 samplelist = d$group # "F" "F" "F" "M" "M" "M" "D" "D" "D"
+samplelist = as.factor(samplelist)
 sample2factor_num = as.numeric( samplelist ) #2 2 2 3 3 3 1 1 1
 
 sample.bg=col_list[sample2factor_num]
-legend_annot = levels(d$group)
+legend_annot = levels(samplelist)
 
 legend_factor = as.numeric(levels( as.factor(sample2factor_num )))
 lengend.bg=col_list[legend_factor]
